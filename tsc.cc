@@ -102,6 +102,10 @@ int Client::connectTo()
                grpc::CreateChannel(
                     login_info, grpc::InsecureChannelCredentials())));
 
+    // **********************************
+    // MODIFY LOGIN TO SEE IF CONNECTED SERVER IS AVAILABLE SERVER
+    // **********************************
+
     IReply ire = Login();
     if(!ire.grpc_status.ok()) {
         return -1;
@@ -300,6 +304,14 @@ IReply Client::Login() {
 
     IReply ire;
     ire.grpc_status = status;
+    // **********************************
+    // IF MESG RECIEVED IS "PORT NUMBER", THEN RECONNECT
+    // **********************************
+    //if (reply.msg() == "Not Available Server") {
+    	//std::string demlimiter = " ";
+	//std::string IP_PORT = reply.msg().substr(1, reply.msg().find(delimiter));
+
+    //}
     if (reply.msg() == "you have already joined") {
         ire.comm_status = FAILURE_ALREADY_EXISTS;
     } else {
