@@ -147,13 +147,17 @@ class SNSServiceImpl final : public SNSService::Service {
     Client c;
     std::string username = request->username();
     int user_index = find_user(username);
+    std::cout << username << " HAS CONNECTED" << std::endl;
     if(user_index < 0){
       c.username = username;
+      c.connected = true;
       client_db.push_back(c);
       reply->set_msg("Login Successful!");
+      std::cout << "LOGIN SUCCESS " << username << std::endl;
     }
     else{ 
       Client *user = &client_db[user_index];
+      std::cout << "CONNECTED?: " << user->connected << std::endl;
       if(user->connected)
         reply->set_msg("Invalid Username");
       else{
@@ -233,7 +237,7 @@ class SNSServiceImpl final : public SNSService::Service {
 };
 
 void RunServer(std::string port_no) {
-  std::string server_address = "0.0.0.0:"+port_no;
+  std::string server_address = "10.0.2.15:"+port_no;
   SNSServiceImpl service;
 
   ServerBuilder builder;

@@ -107,7 +107,8 @@ int Client::connectTo()
     // **********************************
 
     IReply ire = Login();
-    if(!ire.grpc_status.ok()) {
+    //std::cout << "STATUS: " << ire.comm_status;
+    if(ire.comm_status != SUCCESS) {
         return -1;
     }
     return 1;
@@ -260,7 +261,7 @@ IReply Client::Follow(const std::string& username2) {
         ire.comm_status = FAILURE_INVALID_USERNAME;
     } else if (reply.msg() == "you have already joined") {
         ire.comm_status = FAILURE_ALREADY_EXISTS;
-    } else if (reply.msg() == "Follow Successful") {
+    } else if (reply.msg() == "Join Successful") {
         ire.comm_status = SUCCESS;
     } else {
         ire.comm_status = FAILURE_UNKNOWN;
@@ -285,7 +286,7 @@ IReply Client::UnFollow(const std::string& username2) {
         ire.comm_status = FAILURE_INVALID_USERNAME;
     } else if (reply.msg() == "you are not follower") {
         ire.comm_status = FAILURE_INVALID_USERNAME;
-    } else if (reply.msg() == "UnFollow Successful") {
+    } else if (reply.msg() == "Leave Successful") {
         ire.comm_status = SUCCESS;
     } else {
         ire.comm_status = FAILURE_UNKNOWN;
@@ -304,15 +305,19 @@ IReply Client::Login() {
 
     IReply ire;
     ire.grpc_status = status;
+    std::cout << "MSG: " << reply.msg() << std::endl;
     // **********************************
     // IF MESG RECIEVED IS "PORT NUMBER", THEN RECONNECT
     // **********************************
-    //if (reply.msg() == "Not Available Server") {
+    if (reply.msg() == "Not Available Server") {
     	//std::string demlimiter = " ";
-	//std::string IP_PORT = reply.msg().substr(1, reply.msg().find(delimiter));
+	//std::string IP = reply.msg().substr(1, reply.msg().find(delimiter));
+	//std::string PORT = reply.msg().substr(2, reply.msg().find(delimiter));
+	//hostname = IP
+	//port = PORT
 
-    //}
-    if (reply.msg() == "you have already joined") {
+    }
+    else if (reply.msg() == "Invalid Username") {
         ire.comm_status = FAILURE_ALREADY_EXISTS;
     } else {
         ire.comm_status = SUCCESS;
