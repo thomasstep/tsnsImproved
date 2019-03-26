@@ -40,8 +40,11 @@ service SNSService{
   rpc List (Request) returns (ListReply) {}
   rpc Follow (Request) returns (Reply) {}
   rpc UnFollow (Request) returns (Reply) {}
+  rpc KeepAlive (Alive) returns (Alive) {}
+  rpc GetAvailable (Alive) returns (Reply) {}
+  rpc Election (Alive) returns (Alive) {}
   // Bidirectional streaming RPC
-  rpc Timeline (stream Message) returns (stream Message) {} 
+  rpc Timeline (stream Message) returns (stream Message) {}
 }
 
 message ListReply {
@@ -56,6 +59,10 @@ message Request {
 
 message Reply {
   string msg = 1;
+}
+
+message Alive {
+  boolean notDead = 1;
 }
 
 message Message {
