@@ -8,7 +8,7 @@ firstServer=""
 secondServer=""
 thirdServer=""
 
-while getopts i:p:f:s:t opt; do
+while getopts i:p:f:s:t: opt; do
 	case $opt in
 		i)
 			ip=$OPTARG
