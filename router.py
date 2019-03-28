@@ -21,12 +21,32 @@ class snsServicer(sns_pb2_grpc.SNSServiceServicer):
 
 	def __init__(self):
 		# Contains the IP:Port of all machines
-		self.masters = servers
+		self.servers = servers
 		# This is the master that all new clients are routed to
 		self.availableMaster = ""
 
-	def KeepAlive(self, request, context):
-		time.sleep(3)
+	def GetAvailable(self, request, context):
+		available = ""
+		for server in self.servers:
+			# Check if the available server is still alive
+			channel = grpc.insecure_channel(server)
+			stub = sns_pb2_grpc.SNSServiceStub(channel)
+			request = Alive(notdead=True)
+			response = stub.KeepAlive(request)
+			if response.notdead:
+				available = server
+				break
+			# Server is down, move to the next
+			self.servers.pop(server)
+			# Want to keep track of that server just move it to last priority
+			self.servers.append(server)
+		response = Reply()
+		if available == "":
+			response.msg = "No available server"
+		else:
+			response.msg = available
+		return response
+			
 
 # Create the server
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
