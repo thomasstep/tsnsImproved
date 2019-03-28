@@ -62,7 +62,7 @@ message Reply {
 }
 
 message Alive {
-  boolean notDead = 1;
+  bool notDead = 1;
 }
 
 message Message {

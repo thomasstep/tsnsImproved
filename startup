@@ -28,3 +28,5 @@ shift "$((OPTIND-1))"
 
 echo "Using router at address: " "$router" ":" "$routerPort"
 echo "Starting server on address: " "$ip" ":" "$port"
+
+./startup.py
