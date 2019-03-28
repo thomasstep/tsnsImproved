@@ -40,6 +40,8 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <thread>
+#include <chrono>
 #include <stdlib.h>
 #include <unistd.h>
 #include <google/protobuf/util/time_util.h>
@@ -61,6 +63,7 @@ using csce438::ListReply;
 using csce438::Request;
 using csce438::Reply;
 using csce438::SNSService;
+using csce438::Alive;
 
 struct Client {
   std::string username;
@@ -234,6 +237,12 @@ class SNSServiceImpl final : public SNSService::Service {
     return Status::OK;
   }
 
+  Status KeepAlive(ServerContext* context, const Alive* request, Alive* reply) override {
+    // After receipt pause for 3 seconds then return
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    return Status::OK;
+  }
+
 };
 
 void RunServer(std::string port_no) {
@@ -261,6 +270,8 @@ int main(int argc, char** argv) {
 	  std::cerr << "Invalid Command Line Argument\n";
     }
   }
+  // Make yourself a client and try to contact master
+  // Whenever master is dead, go into server and become master
   RunServer(port);
 
   return 0;

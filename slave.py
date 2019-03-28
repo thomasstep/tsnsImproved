@@ -19,7 +19,7 @@ class snsServicer(sns_pb2_grpc.snsServiceServicer):
 		#spawn a thread 
 
 	def KeepAlive(self, request, context):
-		
+		time.sleep(3)
 
 # Create the server
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
