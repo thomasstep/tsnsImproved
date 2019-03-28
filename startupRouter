@@ -1,0 +1,35 @@
+#!/bin/sh
+
+OPTIND=1
+
+ip=""
+port=""
+firstServer=""
+secondServer=""
+thirdServer=""
+
+while getopts i:p:f:s:t opt; do
+	case $opt in
+		i)
+			ip=$OPTARG
+			;;
+		p)
+			port=$OPTARG
+			;;
+		f)
+			firstServer=$OPTARG
+			;;
+		s)
+			secondServer=$OPTARG
+			;;
+		t)
+			thirdServer=$OPTARG
+			;;
+	esac
+done
+
+shift "$((OPTIND-1))"
+
+echo "Starting router on address: " "$ip" ":" "$port"
+
+/home/csce438/tsnsImproved/router.py $ip $port $firstServer $secondServer $thirdServer

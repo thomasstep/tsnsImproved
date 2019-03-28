@@ -7,14 +7,16 @@ To clear the directory (and remove .txt files):
    
     make clean
 
-To run the server on port 3010:
+To run a server:
 
-    ./tsd -p 3010
+    ./startup -r <routerIP> -t <routerPort> -i <thisMachinesIP> -p <thisMachinesPort>
 
-To run the client  
+To run the router:
 
-    ./tsc -h host_addr -p 3010 -u user1
+    ./startupRouter -i <thisMachinesIP> -p <thisMachinesPort> -f <serverIP:Port> -s <serverIP:Port> -t <serverIP:Port>
 
 Deadlines: https://blog.codeship.com/using-grpc-in-python/
 
 ???: https://grpc.io/grpc/python/grpc.html#grpc.ChannelConnectivity.SHUTDOWN
+
+

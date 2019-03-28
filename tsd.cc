@@ -246,8 +246,8 @@ class SNSServiceImpl final : public SNSService::Service {
 
 };
 
-void RunServer(std::string port_no) {
-  std::string server_address = "0.0.0.0:"+port_no;
+void RunServer(std::string ip, std::string port_no) {
+  std::string server_address = ip + ":" + port_no;
   SNSServiceImpl service;
 
   ServerBuilder builder;
@@ -262,18 +262,23 @@ void RunServer(std::string port_no) {
 int main(int argc, char** argv) {
   
   std::string port = "3010";
+  std::string ip = "0.0.0.0";
   int opt = 0;
-  while ((opt = getopt(argc, argv, "p:")) != -1){
+  while ((opt = getopt(argc, argv, "i:p:")) != -1){
     switch(opt) {
       case 'p':
-          port = optarg;break;
+          port = optarg;
+          break;
+      case 'i':
+          ip = optarg;
+          break;
       default:
 	  std::cerr << "Invalid Command Line Argument\n";
     }
   }
   // Make yourself a client and try to contact master
   // Whenever master is dead, go into server and become master
-  std::string login_info = "0.0.0.0:" + port;
+  std::string login_info = ip + ":" + port;
   std::unique_ptr<SNSService::Stub> stub = std::unique_ptr<SNSService::Stub>(SNSService::NewStub(
                grpc::CreateChannel(
                     login_info, grpc::InsecureChannelCredentials())));
@@ -287,13 +292,12 @@ int main(int argc, char** argv) {
     request = new(Alive);
     reply = new(Alive);
     context = new(ClientContext);
-    std::cout << "Still here" << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     Status status = stub->KeepAlive(context, *request, reply);
   } while (reply->notdead());
 
-  system(("/home/csce438/tsnsImproved/startup.py " + port).c_str());
-  RunServer(port);
+  system(("/home/csce438/tsnsImproved/startup.py " + ip + " " + port).c_str());
+  RunServer(ip, port);
 
   return 0;
 }

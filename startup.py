@@ -3,6 +3,4 @@
 import subprocess
 import sys
 
-#subprocess.call(["gnome-terminal", "-c python /home/csce438/test.py"], shell=True)
-
-subprocess.Popen(["gnome-terminal", "-x", "/home/csce438/tsnsImproved/tsd", "-p "+sys.argv[1]])
+subprocess.Popen(["gnome-terminal", "-x", "/home/csce438/tsnsImproved/tsd", "-p"+sys.argv[2], "-i"+sys.argv[1]])
