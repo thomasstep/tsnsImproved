@@ -16,3 +16,5 @@ To run the client
     ./tsc -h host_addr -p 3010 -u user1
 
 Deadlines: https://blog.codeship.com/using-grpc-in-python/
+
+???: https://grpc.io/grpc/python/grpc.html#grpc.ChannelConnectivity.SHUTDOWN
