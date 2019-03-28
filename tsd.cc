@@ -51,6 +51,7 @@
 
 using google::protobuf::Timestamp;
 using google::protobuf::Duration;
+using grpc::ClientContext;
 using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
@@ -239,14 +240,14 @@ class SNSServiceImpl final : public SNSService::Service {
 
   Status KeepAlive(ServerContext* context, const Alive* request, Alive* reply) override {
     // After receipt pause for 3 seconds then return
-    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    reply->set_notdead(true);
     return Status::OK;
   }
 
 };
 
 void RunServer(std::string port_no) {
-  std::string server_address = "10.0.2.15:"+port_no;
+  std::string server_address = "0.0.0.0:"+port_no;
   SNSServiceImpl service;
 
   ServerBuilder builder;
@@ -272,6 +273,25 @@ int main(int argc, char** argv) {
   }
   // Make yourself a client and try to contact master
   // Whenever master is dead, go into server and become master
+  std::string login_info = "0.0.0.0:" + port;
+  std::unique_ptr<SNSService::Stub> stub = std::unique_ptr<SNSService::Stub>(SNSService::NewStub(
+               grpc::CreateChannel(
+                    login_info, grpc::InsecureChannelCredentials())));
+  Alive* request = new(Alive);
+  Alive* reply = new(Alive);
+  ClientContext* context = new(ClientContext);
+  do {
+    delete request;
+    delete reply;
+    delete context;
+    request = new(Alive);
+    reply = new(Alive);
+    context = new(ClientContext);
+    std::cout << "Still here" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    Status status = stub->KeepAlive(context, *request, reply);
+  } while (reply->notdead());
+
   RunServer(port);
 
   return 0;

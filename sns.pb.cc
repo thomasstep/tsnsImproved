@@ -35,6 +35,11 @@ class ReplyDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<Reply>
       _instance;
 } _Reply_default_instance_;
+class AliveDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Alive>
+      _instance;
+} _Alive_default_instance_;
 class MessageDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Message>
@@ -105,6 +110,27 @@ void InitDefaultsReply() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsReplyImpl);
 }
 
+void InitDefaultsAliveImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  {
+    void* ptr = &::csce438::_Alive_default_instance_;
+    new (ptr) ::csce438::Alive();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::csce438::Alive::InitAsDefaultInstance();
+}
+
+void InitDefaultsAlive() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsAliveImpl);
+}
+
 void InitDefaultsMessageImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -127,7 +153,7 @@ void InitDefaultsMessage() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsMessageImpl);
 }
 
-::google::protobuf::Metadata file_level_metadata[4];
+::google::protobuf::Metadata file_level_metadata[5];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -151,6 +177,12 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::csce438::Reply, msg_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::csce438::Alive, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::csce438::Alive, notdead_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::csce438::Message, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -163,13 +195,15 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 0, -1, sizeof(::csce438::ListReply)},
   { 7, -1, sizeof(::csce438::Request)},
   { 14, -1, sizeof(::csce438::Reply)},
-  { 20, -1, sizeof(::csce438::Message)},
+  { 20, -1, sizeof(::csce438::Alive)},
+  { 26, -1, sizeof(::csce438::Message)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::csce438::_ListReply_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::csce438::_Request_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::csce438::_Reply_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::csce438::_Alive_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::csce438::_Message_default_instance_),
 };
 
@@ -189,7 +223,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 5);
 }
 
 void AddDescriptorsImpl() {
@@ -199,19 +233,23 @@ void AddDescriptorsImpl() {
       "mestamp.proto\"1\n\tListReply\022\021\n\tall_users\030"
       "\001 \003(\t\022\021\n\tfollowers\030\002 \003(\t\".\n\007Request\022\020\n\010u"
       "sername\030\001 \001(\t\022\021\n\targuments\030\002 \003(\t\"\024\n\005Repl"
-      "y\022\013\n\003msg\030\001 \001(\t\"W\n\007Message\022\020\n\010username\030\001 "
-      "\001(\t\022\013\n\003msg\030\002 \001(\t\022-\n\ttimestamp\030\003 \001(\0132\032.go"
-      "ogle.protobuf.Timestamp2\375\001\n\nSNSService\022+"
-      "\n\005Login\022\020.csce438.Request\032\016.csce438.Repl"
-      "y\"\000\022.\n\004List\022\020.csce438.Request\032\022.csce438."
-      "ListReply\"\000\022,\n\006Follow\022\020.csce438.Request\032"
-      "\016.csce438.Reply\"\000\022.\n\010UnFollow\022\020.csce438."
-      "Request\032\016.csce438.Reply\"\000\0224\n\010Timeline\022\020."
-      "csce438.Message\032\020.csce438.Message\"\000(\0010\001b"
-      "\006proto3"
+      "y\022\013\n\003msg\030\001 \001(\t\"\030\n\005Alive\022\017\n\007notDead\030\001 \001(\010"
+      "\"W\n\007Message\022\020\n\010username\030\001 \001(\t\022\013\n\003msg\030\002 \001"
+      "(\t\022-\n\ttimestamp\030\003 \001(\0132\032.google.protobuf."
+      "Timestamp2\214\003\n\nSNSService\022+\n\005Login\022\020.csce"
+      "438.Request\032\016.csce438.Reply\"\000\022.\n\004List\022\020."
+      "csce438.Request\032\022.csce438.ListReply\"\000\022,\n"
+      "\006Follow\022\020.csce438.Request\032\016.csce438.Repl"
+      "y\"\000\022.\n\010UnFollow\022\020.csce438.Request\032\016.csce"
+      "438.Reply\"\000\022-\n\tKeepAlive\022\016.csce438.Alive"
+      "\032\016.csce438.Alive\"\000\0220\n\014GetAvailable\022\016.csc"
+      "e438.Alive\032\016.csce438.Reply\"\000\022,\n\010Election"
+      "\022\016.csce438.Alive\032\016.csce438.Alive\"\000\0224\n\010Ti"
+      "meline\022\020.csce438.Message\032\020.csce438.Messa"
+      "ge\"\000(\0010\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 527);
+      descriptor, 696);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "sns.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2ftimestamp_2eproto::AddDescriptors();
@@ -1086,6 +1124,242 @@ void Reply::InternalSwap(Reply* other) {
 }
 
 ::google::protobuf::Metadata Reply::GetMetadata() const {
+  protobuf_sns_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_sns_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void Alive::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Alive::kNotDeadFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Alive::Alive()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_sns_2eproto::InitDefaultsAlive();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:csce438.Alive)
+}
+Alive::Alive(const Alive& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  notdead_ = from.notdead_;
+  // @@protoc_insertion_point(copy_constructor:csce438.Alive)
+}
+
+void Alive::SharedCtor() {
+  notdead_ = false;
+  _cached_size_ = 0;
+}
+
+Alive::~Alive() {
+  // @@protoc_insertion_point(destructor:csce438.Alive)
+  SharedDtor();
+}
+
+void Alive::SharedDtor() {
+}
+
+void Alive::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Alive::descriptor() {
+  ::protobuf_sns_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_sns_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const Alive& Alive::default_instance() {
+  ::protobuf_sns_2eproto::InitDefaultsAlive();
+  return *internal_default_instance();
+}
+
+Alive* Alive::New(::google::protobuf::Arena* arena) const {
+  Alive* n = new Alive;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void Alive::Clear() {
+// @@protoc_insertion_point(message_clear_start:csce438.Alive)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  notdead_ = false;
+  _internal_metadata_.Clear();
+}
+
+bool Alive::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:csce438.Alive)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // bool notDead = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &notdead_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:csce438.Alive)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:csce438.Alive)
+  return false;
+#undef DO_
+}
+
+void Alive::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:csce438.Alive)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool notDead = 1;
+  if (this->notdead() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->notdead(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:csce438.Alive)
+}
+
+::google::protobuf::uint8* Alive::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:csce438.Alive)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool notDead = 1;
+  if (this->notdead() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->notdead(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:csce438.Alive)
+  return target;
+}
+
+size_t Alive::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:csce438.Alive)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // bool notDead = 1;
+  if (this->notdead() != 0) {
+    total_size += 1 + 1;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Alive::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:csce438.Alive)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Alive* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const Alive>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:csce438.Alive)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:csce438.Alive)
+    MergeFrom(*source);
+  }
+}
+
+void Alive::MergeFrom(const Alive& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:csce438.Alive)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.notdead() != 0) {
+    set_notdead(from.notdead());
+  }
+}
+
+void Alive::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:csce438.Alive)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Alive::CopyFrom(const Alive& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:csce438.Alive)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Alive::IsInitialized() const {
+  return true;
+}
+
+void Alive::Swap(Alive* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Alive::InternalSwap(Alive* other) {
+  using std::swap;
+  swap(notdead_, other->notdead_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata Alive::GetMetadata() const {
   protobuf_sns_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_sns_2eproto::file_level_metadata[kIndexInFileMessages];
 }
