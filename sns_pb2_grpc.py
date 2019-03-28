@@ -44,10 +44,10 @@ class SNSServiceStub(object):
         request_serializer=sns__pb2.Alive.SerializeToString,
         response_deserializer=sns__pb2.Reply.FromString,
         )
-    self.Election = channel.unary_unary(
-        '/csce438.SNSService/Election',
-        request_serializer=sns__pb2.Alive.SerializeToString,
-        response_deserializer=sns__pb2.Alive.FromString,
+    self.FindRouter = channel.unary_unary(
+        '/csce438.SNSService/FindRouter',
+        request_serializer=sns__pb2.Reply.SerializeToString,
+        response_deserializer=sns__pb2.Reply.FromString,
         )
     self.Timeline = channel.stream_stream(
         '/csce438.SNSService/Timeline',
@@ -102,7 +102,7 @@ class SNSServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def Election(self, request, context):
+  def FindRouter(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -149,10 +149,10 @@ def add_SNSServiceServicer_to_server(servicer, server):
           request_deserializer=sns__pb2.Alive.FromString,
           response_serializer=sns__pb2.Reply.SerializeToString,
       ),
-      'Election': grpc.unary_unary_rpc_method_handler(
-          servicer.Election,
-          request_deserializer=sns__pb2.Alive.FromString,
-          response_serializer=sns__pb2.Alive.SerializeToString,
+      'FindRouter': grpc.unary_unary_rpc_method_handler(
+          servicer.FindRouter,
+          request_deserializer=sns__pb2.Reply.FromString,
+          response_serializer=sns__pb2.Reply.SerializeToString,
       ),
       'Timeline': grpc.stream_stream_rpc_method_handler(
           servicer.Timeline,

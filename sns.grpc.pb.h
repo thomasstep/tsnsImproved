@@ -106,12 +106,12 @@ class SNSService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>> PrepareAsyncGetAvailable(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>>(PrepareAsyncGetAvailableRaw(context, request, cq));
     }
-    virtual ::grpc::Status Election(::grpc::ClientContext* context, const ::csce438::Alive& request, ::csce438::Alive* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Alive>> AsyncElection(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Alive>>(AsyncElectionRaw(context, request, cq));
+    virtual ::grpc::Status FindRouter(::grpc::ClientContext* context, const ::csce438::Reply& request, ::csce438::Reply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>> AsyncFindRouter(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>>(AsyncFindRouterRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Alive>> PrepareAsyncElection(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Alive>>(PrepareAsyncElectionRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>> PrepareAsyncFindRouter(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>>(PrepareAsyncFindRouterRaw(context, request, cq));
     }
     // Bidirectional streaming RPC
     std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::csce438::Message, ::csce438::Message>> Timeline(::grpc::ClientContext* context) {
@@ -136,8 +136,8 @@ class SNSService final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Alive>* PrepareAsyncKeepAliveRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>* AsyncGetAvailableRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>* PrepareAsyncGetAvailableRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Alive>* AsyncElectionRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Alive>* PrepareAsyncElectionRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>* AsyncFindRouterRaw(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::csce438::Reply>* PrepareAsyncFindRouterRaw(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientReaderWriterInterface< ::csce438::Message, ::csce438::Message>* TimelineRaw(::grpc::ClientContext* context) = 0;
     virtual ::grpc::ClientAsyncReaderWriterInterface< ::csce438::Message, ::csce438::Message>* AsyncTimelineRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
     virtual ::grpc::ClientAsyncReaderWriterInterface< ::csce438::Message, ::csce438::Message>* PrepareAsyncTimelineRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
@@ -187,12 +187,12 @@ class SNSService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Reply>> PrepareAsyncGetAvailable(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Reply>>(PrepareAsyncGetAvailableRaw(context, request, cq));
     }
-    ::grpc::Status Election(::grpc::ClientContext* context, const ::csce438::Alive& request, ::csce438::Alive* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Alive>> AsyncElection(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Alive>>(AsyncElectionRaw(context, request, cq));
+    ::grpc::Status FindRouter(::grpc::ClientContext* context, const ::csce438::Reply& request, ::csce438::Reply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Reply>> AsyncFindRouter(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Reply>>(AsyncFindRouterRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Alive>> PrepareAsyncElection(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Alive>>(PrepareAsyncElectionRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Reply>> PrepareAsyncFindRouter(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::csce438::Reply>>(PrepareAsyncFindRouterRaw(context, request, cq));
     }
     std::unique_ptr< ::grpc::ClientReaderWriter< ::csce438::Message, ::csce438::Message>> Timeline(::grpc::ClientContext* context) {
       return std::unique_ptr< ::grpc::ClientReaderWriter< ::csce438::Message, ::csce438::Message>>(TimelineRaw(context));
@@ -218,8 +218,8 @@ class SNSService final {
     ::grpc::ClientAsyncResponseReader< ::csce438::Alive>* PrepareAsyncKeepAliveRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::csce438::Reply>* AsyncGetAvailableRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::csce438::Reply>* PrepareAsyncGetAvailableRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::csce438::Alive>* AsyncElectionRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::csce438::Alive>* PrepareAsyncElectionRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::csce438::Reply>* AsyncFindRouterRaw(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::csce438::Reply>* PrepareAsyncFindRouterRaw(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientReaderWriter< ::csce438::Message, ::csce438::Message>* TimelineRaw(::grpc::ClientContext* context) override;
     ::grpc::ClientAsyncReaderWriter< ::csce438::Message, ::csce438::Message>* AsyncTimelineRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncReaderWriter< ::csce438::Message, ::csce438::Message>* PrepareAsyncTimelineRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
@@ -229,7 +229,7 @@ class SNSService final {
     const ::grpc::internal::RpcMethod rpcmethod_UnFollow_;
     const ::grpc::internal::RpcMethod rpcmethod_KeepAlive_;
     const ::grpc::internal::RpcMethod rpcmethod_GetAvailable_;
-    const ::grpc::internal::RpcMethod rpcmethod_Election_;
+    const ::grpc::internal::RpcMethod rpcmethod_FindRouter_;
     const ::grpc::internal::RpcMethod rpcmethod_Timeline_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
@@ -244,7 +244,7 @@ class SNSService final {
     virtual ::grpc::Status UnFollow(::grpc::ServerContext* context, const ::csce438::Request* request, ::csce438::Reply* response);
     virtual ::grpc::Status KeepAlive(::grpc::ServerContext* context, const ::csce438::Alive* request, ::csce438::Alive* response);
     virtual ::grpc::Status GetAvailable(::grpc::ServerContext* context, const ::csce438::Alive* request, ::csce438::Reply* response);
-    virtual ::grpc::Status Election(::grpc::ServerContext* context, const ::csce438::Alive* request, ::csce438::Alive* response);
+    virtual ::grpc::Status FindRouter(::grpc::ServerContext* context, const ::csce438::Reply* request, ::csce438::Reply* response);
     // Bidirectional streaming RPC
     virtual ::grpc::Status Timeline(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::csce438::Message, ::csce438::Message>* stream);
   };
@@ -369,22 +369,22 @@ class SNSService final {
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_Election : public BaseClass {
+  class WithAsyncMethod_FindRouter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_Election() {
+    WithAsyncMethod_FindRouter() {
       ::grpc::Service::MarkMethodAsync(6);
     }
-    ~WithAsyncMethod_Election() override {
+    ~WithAsyncMethod_FindRouter() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Election(::grpc::ServerContext* context, const ::csce438::Alive* request, ::csce438::Alive* response) final override {
+    ::grpc::Status FindRouter(::grpc::ServerContext* context, const ::csce438::Reply* request, ::csce438::Reply* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestElection(::grpc::ServerContext* context, ::csce438::Alive* request, ::grpc::ServerAsyncResponseWriter< ::csce438::Alive>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestFindRouter(::grpc::ServerContext* context, ::csce438::Reply* request, ::grpc::ServerAsyncResponseWriter< ::csce438::Reply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -408,7 +408,7 @@ class SNSService final {
       ::grpc::Service::RequestAsyncBidiStreaming(7, context, stream, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_Login<WithAsyncMethod_List<WithAsyncMethod_Follow<WithAsyncMethod_UnFollow<WithAsyncMethod_KeepAlive<WithAsyncMethod_GetAvailable<WithAsyncMethod_Election<WithAsyncMethod_Timeline<Service > > > > > > > > AsyncService;
+  typedef WithAsyncMethod_Login<WithAsyncMethod_List<WithAsyncMethod_Follow<WithAsyncMethod_UnFollow<WithAsyncMethod_KeepAlive<WithAsyncMethod_GetAvailable<WithAsyncMethod_FindRouter<WithAsyncMethod_Timeline<Service > > > > > > > > AsyncService;
   template <class BaseClass>
   class WithGenericMethod_Login : public BaseClass {
    private:
@@ -512,18 +512,18 @@ class SNSService final {
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_Election : public BaseClass {
+  class WithGenericMethod_FindRouter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_Election() {
+    WithGenericMethod_FindRouter() {
       ::grpc::Service::MarkMethodGeneric(6);
     }
-    ~WithGenericMethod_Election() override {
+    ~WithGenericMethod_FindRouter() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Election(::grpc::ServerContext* context, const ::csce438::Alive* request, ::csce438::Alive* response) final override {
+    ::grpc::Status FindRouter(::grpc::ServerContext* context, const ::csce438::Reply* request, ::csce438::Reply* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -666,28 +666,28 @@ class SNSService final {
     virtual ::grpc::Status StreamedGetAvailable(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::csce438::Alive,::csce438::Reply>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_Election : public BaseClass {
+  class WithStreamedUnaryMethod_FindRouter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithStreamedUnaryMethod_Election() {
+    WithStreamedUnaryMethod_FindRouter() {
       ::grpc::Service::MarkMethodStreamed(6,
-        new ::grpc::internal::StreamedUnaryHandler< ::csce438::Alive, ::csce438::Alive>(std::bind(&WithStreamedUnaryMethod_Election<BaseClass>::StreamedElection, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::csce438::Reply, ::csce438::Reply>(std::bind(&WithStreamedUnaryMethod_FindRouter<BaseClass>::StreamedFindRouter, this, std::placeholders::_1, std::placeholders::_2)));
     }
-    ~WithStreamedUnaryMethod_Election() override {
+    ~WithStreamedUnaryMethod_FindRouter() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Election(::grpc::ServerContext* context, const ::csce438::Alive* request, ::csce438::Alive* response) final override {
+    ::grpc::Status FindRouter(::grpc::ServerContext* context, const ::csce438::Reply* request, ::csce438::Reply* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedElection(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::csce438::Alive,::csce438::Alive>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedFindRouter(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::csce438::Reply,::csce438::Reply>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_Login<WithStreamedUnaryMethod_List<WithStreamedUnaryMethod_Follow<WithStreamedUnaryMethod_UnFollow<WithStreamedUnaryMethod_KeepAlive<WithStreamedUnaryMethod_GetAvailable<WithStreamedUnaryMethod_Election<Service > > > > > > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_Login<WithStreamedUnaryMethod_List<WithStreamedUnaryMethod_Follow<WithStreamedUnaryMethod_UnFollow<WithStreamedUnaryMethod_KeepAlive<WithStreamedUnaryMethod_GetAvailable<WithStreamedUnaryMethod_FindRouter<Service > > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_Login<WithStreamedUnaryMethod_List<WithStreamedUnaryMethod_Follow<WithStreamedUnaryMethod_UnFollow<WithStreamedUnaryMethod_KeepAlive<WithStreamedUnaryMethod_GetAvailable<WithStreamedUnaryMethod_Election<Service > > > > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_Login<WithStreamedUnaryMethod_List<WithStreamedUnaryMethod_Follow<WithStreamedUnaryMethod_UnFollow<WithStreamedUnaryMethod_KeepAlive<WithStreamedUnaryMethod_GetAvailable<WithStreamedUnaryMethod_FindRouter<Service > > > > > > > StreamedService;
 };
 
 }  // namespace csce438

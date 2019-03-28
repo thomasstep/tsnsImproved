@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='csce438',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\tsns.proto\x12\x07\x63sce438\x1a\x1fgoogle/protobuf/timestamp.proto\"1\n\tListReply\x12\x11\n\tall_users\x18\x01 \x03(\t\x12\x11\n\tfollowers\x18\x02 \x03(\t\".\n\x07Request\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x11\n\targuments\x18\x02 \x03(\t\"\x14\n\x05Reply\x12\x0b\n\x03msg\x18\x01 \x01(\t\"\x18\n\x05\x41live\x12\x0f\n\x07notDead\x18\x01 \x01(\x08\"W\n\x07Message\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x0b\n\x03msg\x18\x02 \x01(\t\x12-\n\ttimestamp\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp2\x8c\x03\n\nSNSService\x12+\n\x05Login\x12\x10.csce438.Request\x1a\x0e.csce438.Reply\"\x00\x12.\n\x04List\x12\x10.csce438.Request\x1a\x12.csce438.ListReply\"\x00\x12,\n\x06\x46ollow\x12\x10.csce438.Request\x1a\x0e.csce438.Reply\"\x00\x12.\n\x08UnFollow\x12\x10.csce438.Request\x1a\x0e.csce438.Reply\"\x00\x12-\n\tKeepAlive\x12\x0e.csce438.Alive\x1a\x0e.csce438.Alive\"\x00\x12\x30\n\x0cGetAvailable\x12\x0e.csce438.Alive\x1a\x0e.csce438.Reply\"\x00\x12,\n\x08\x45lection\x12\x0e.csce438.Alive\x1a\x0e.csce438.Alive\"\x00\x12\x34\n\x08Timeline\x12\x10.csce438.Message\x1a\x10.csce438.Message\"\x00(\x01\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\tsns.proto\x12\x07\x63sce438\x1a\x1fgoogle/protobuf/timestamp.proto\"1\n\tListReply\x12\x11\n\tall_users\x18\x01 \x03(\t\x12\x11\n\tfollowers\x18\x02 \x03(\t\".\n\x07Request\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x11\n\targuments\x18\x02 \x03(\t\"\x14\n\x05Reply\x12\x0b\n\x03msg\x18\x01 \x01(\t\"\x18\n\x05\x41live\x12\x0f\n\x07notDead\x18\x01 \x01(\x08\"W\n\x07Message\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x0b\n\x03msg\x18\x02 \x01(\t\x12-\n\ttimestamp\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp2\x8e\x03\n\nSNSService\x12+\n\x05Login\x12\x10.csce438.Request\x1a\x0e.csce438.Reply\"\x00\x12.\n\x04List\x12\x10.csce438.Request\x1a\x12.csce438.ListReply\"\x00\x12,\n\x06\x46ollow\x12\x10.csce438.Request\x1a\x0e.csce438.Reply\"\x00\x12.\n\x08UnFollow\x12\x10.csce438.Request\x1a\x0e.csce438.Reply\"\x00\x12-\n\tKeepAlive\x12\x0e.csce438.Alive\x1a\x0e.csce438.Alive\"\x00\x12\x30\n\x0cGetAvailable\x12\x0e.csce438.Alive\x1a\x0e.csce438.Reply\"\x00\x12.\n\nFindRouter\x12\x0e.csce438.Reply\x1a\x0e.csce438.Reply\"\x00\x12\x34\n\x08Timeline\x12\x10.csce438.Message\x1a\x10.csce438.Message\"\x00(\x01\x30\x01\x62\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -261,7 +261,7 @@ _SNSSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   serialized_start=292,
-  serialized_end=688,
+  serialized_end=690,
   methods=[
   _descriptor.MethodDescriptor(
     name='Login',
@@ -318,12 +318,12 @@ _SNSSERVICE = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='Election',
-    full_name='csce438.SNSService.Election',
+    name='FindRouter',
+    full_name='csce438.SNSService.FindRouter',
     index=6,
     containing_service=None,
-    input_type=_ALIVE,
-    output_type=_ALIVE,
+    input_type=_REPLY,
+    output_type=_REPLY,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(

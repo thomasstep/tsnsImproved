@@ -236,20 +236,20 @@ void AddDescriptorsImpl() {
       "y\022\013\n\003msg\030\001 \001(\t\"\030\n\005Alive\022\017\n\007notDead\030\001 \001(\010"
       "\"W\n\007Message\022\020\n\010username\030\001 \001(\t\022\013\n\003msg\030\002 \001"
       "(\t\022-\n\ttimestamp\030\003 \001(\0132\032.google.protobuf."
-      "Timestamp2\214\003\n\nSNSService\022+\n\005Login\022\020.csce"
+      "Timestamp2\216\003\n\nSNSService\022+\n\005Login\022\020.csce"
       "438.Request\032\016.csce438.Reply\"\000\022.\n\004List\022\020."
       "csce438.Request\032\022.csce438.ListReply\"\000\022,\n"
       "\006Follow\022\020.csce438.Request\032\016.csce438.Repl"
       "y\"\000\022.\n\010UnFollow\022\020.csce438.Request\032\016.csce"
       "438.Reply\"\000\022-\n\tKeepAlive\022\016.csce438.Alive"
       "\032\016.csce438.Alive\"\000\0220\n\014GetAvailable\022\016.csc"
-      "e438.Alive\032\016.csce438.Reply\"\000\022,\n\010Election"
-      "\022\016.csce438.Alive\032\016.csce438.Alive\"\000\0224\n\010Ti"
-      "meline\022\020.csce438.Message\032\020.csce438.Messa"
-      "ge\"\000(\0010\001b\006proto3"
+      "e438.Alive\032\016.csce438.Reply\"\000\022.\n\nFindRout"
+      "er\022\016.csce438.Reply\032\016.csce438.Reply\"\000\0224\n\010"
+      "Timeline\022\020.csce438.Message\032\020.csce438.Mes"
+      "sage\"\000(\0010\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 696);
+      descriptor, 698);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "sns.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2ftimestamp_2eproto::AddDescriptors();

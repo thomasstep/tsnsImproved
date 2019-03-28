@@ -42,7 +42,7 @@ service SNSService{
   rpc UnFollow (Request) returns (Reply) {}
   rpc KeepAlive (Alive) returns (Alive) {}
   rpc GetAvailable (Alive) returns (Reply) {}
-  rpc Election (Alive) returns (Alive) {}
+  rpc FindRouter (Reply) returns (Reply) {}
   // Bidirectional streaming RPC
   rpc Timeline (stream Message) returns (stream Message) {}
 }

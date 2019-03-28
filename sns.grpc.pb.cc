@@ -22,7 +22,7 @@ static const char* SNSService_method_names[] = {
   "/csce438.SNSService/UnFollow",
   "/csce438.SNSService/KeepAlive",
   "/csce438.SNSService/GetAvailable",
-  "/csce438.SNSService/Election",
+  "/csce438.SNSService/FindRouter",
   "/csce438.SNSService/Timeline",
 };
 
@@ -38,7 +38,7 @@ SNSService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel
   , rpcmethod_UnFollow_(SNSService_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_KeepAlive_(SNSService_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_GetAvailable_(SNSService_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Election_(SNSService_method_names[6], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_FindRouter_(SNSService_method_names[6], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_Timeline_(SNSService_method_names[7], ::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   {}
 
@@ -114,16 +114,16 @@ SNSService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::csce438::Reply>::Create(channel_.get(), cq, rpcmethod_GetAvailable_, context, request, false);
 }
 
-::grpc::Status SNSService::Stub::Election(::grpc::ClientContext* context, const ::csce438::Alive& request, ::csce438::Alive* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_Election_, context, request, response);
+::grpc::Status SNSService::Stub::FindRouter(::grpc::ClientContext* context, const ::csce438::Reply& request, ::csce438::Reply* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_FindRouter_, context, request, response);
 }
 
-::grpc::ClientAsyncResponseReader< ::csce438::Alive>* SNSService::Stub::AsyncElectionRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::csce438::Alive>::Create(channel_.get(), cq, rpcmethod_Election_, context, request, true);
+::grpc::ClientAsyncResponseReader< ::csce438::Reply>* SNSService::Stub::AsyncFindRouterRaw(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::csce438::Reply>::Create(channel_.get(), cq, rpcmethod_FindRouter_, context, request, true);
 }
 
-::grpc::ClientAsyncResponseReader< ::csce438::Alive>* SNSService::Stub::PrepareAsyncElectionRaw(::grpc::ClientContext* context, const ::csce438::Alive& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::csce438::Alive>::Create(channel_.get(), cq, rpcmethod_Election_, context, request, false);
+::grpc::ClientAsyncResponseReader< ::csce438::Reply>* SNSService::Stub::PrepareAsyncFindRouterRaw(::grpc::ClientContext* context, const ::csce438::Reply& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::csce438::Reply>::Create(channel_.get(), cq, rpcmethod_FindRouter_, context, request, false);
 }
 
 ::grpc::ClientReaderWriter< ::csce438::Message, ::csce438::Message>* SNSService::Stub::TimelineRaw(::grpc::ClientContext* context) {
@@ -172,8 +172,8 @@ SNSService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       SNSService_method_names[6],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< SNSService::Service, ::csce438::Alive, ::csce438::Alive>(
-          std::mem_fn(&SNSService::Service::Election), this)));
+      new ::grpc::internal::RpcMethodHandler< SNSService::Service, ::csce438::Reply, ::csce438::Reply>(
+          std::mem_fn(&SNSService::Service::FindRouter), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       SNSService_method_names[7],
       ::grpc::internal::RpcMethod::BIDI_STREAMING,
@@ -226,7 +226,7 @@ SNSService::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status SNSService::Service::Election(::grpc::ServerContext* context, const ::csce438::Alive* request, ::csce438::Alive* response) {
+::grpc::Status SNSService::Service::FindRouter(::grpc::ServerContext* context, const ::csce438::Reply* request, ::csce438::Reply* response) {
   (void) context;
   (void) request;
   (void) response;
