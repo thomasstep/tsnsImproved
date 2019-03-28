@@ -1,0 +1,30 @@
+#!/bin/sh
+
+OPTIND=1
+
+router=""
+routerPort=""
+ip=""
+port=""
+
+while getopts r:t:i:p: opt; do
+	case $opt in
+		r)
+			router=$OPTARG
+			;;
+		t)
+			routerPort=$OPTARG
+			;;
+		i)
+			ip=$OPTARG
+			;;
+		p)
+			port=$OPTARG
+			;;
+	esac
+done
+
+shift "$((OPTIND-1))"
+
+echo "Using router at address: " "$router" ":" "$routerPort"
+echo "Starting server on address: " "$ip" ":" "$port"
