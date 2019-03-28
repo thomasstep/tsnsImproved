@@ -292,6 +292,7 @@ int main(int argc, char** argv) {
     Status status = stub->KeepAlive(context, *request, reply);
   } while (reply->notdead());
 
+  system(("/home/csce438/tsnsImproved/startup.py " + port).c_str());
   RunServer(port);
 
   return 0;
