@@ -30,6 +30,4 @@ done
 
 shift "$((OPTIND-1))"
 
-echo "Starting router on address: " "$ip" ":" "$port"
-
 /home/csce438/tsnsImproved/router.py $ip $port $firstServer $secondServer $thirdServer

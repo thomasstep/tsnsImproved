@@ -22,25 +22,32 @@ class snsServicer(sns_pb2_grpc.SNSServiceServicer):
 	def __init__(self):
 		# Contains the IP:Port of all machines
 		self.servers = servers
-		# This is the master that all new clients are routed to
-		self.availableMaster = ""
 
 	def GetAvailable(self, request, context):
 		available = ""
 		for server in self.servers:
 			# Check if the available server is still alive
-			channel = grpc.insecure_channel(server)
-			stub = sns_pb2_grpc.SNSServiceStub(channel)
-			request = Alive(notdead=True)
-			response = stub.KeepAlive(request)
-			if response.notdead:
-				available = server
-				break
-			# Server is down, move to the next
-			self.servers.pop(server)
-			# Want to keep track of that server just move it to last priority
-			self.servers.append(server)
-		response = Reply()
+			print("Checking if " + server + " is still alive")
+			try:
+				channel = grpc.insecure_channel(server)
+				print("Have a channel")
+				stub = sns_pb2_grpc.SNSServiceStub(channel)
+				print("Have a stub")
+				request = sns_pb2.Alive(notDead=True)
+				print("About to send request")
+				response = stub.KeepAlive(request)
+				print("Got a response")
+				if response.notDead:
+					available = server
+					break
+			except grpc.RpcError as e:
+				print("Caught could not connect")
+				print(e.code())
+				# Server is down, move to the next
+				self.servers.pop(server)
+				# Want to keep track of that server just move it to last priority
+				self.servers.append(server)
+		response = sns_pb2.Reply(msg="")
 		if available == "":
 			response.msg = "No available server"
 		else:
@@ -57,6 +64,7 @@ sns_pb2_grpc.add_SNSServiceServicer_to_server(snsServicer(), server)
 # Listen on port given
 server.add_insecure_port(sys.argv[1] + ":" + sys.argv[2])
 server.start()
+print("Router started on " + sys.argv[1] + ":" + sys.argv[2])
 
 try:
 	while True:
