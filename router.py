@@ -25,6 +25,7 @@ class snsServicer(sns_pb2_grpc.SNSServiceServicer):
 
 	def GetAvailable(self, request, context):
 		available = ""
+		print(self.servers)
 		for server in self.servers:
 			# Check if the available server is still alive
 			print("Checking if " + server + " is still alive")
@@ -37,10 +38,10 @@ class snsServicer(sns_pb2_grpc.SNSServiceServicer):
 					available = server
 					break
 			except grpc.RpcError as e:
-				print("Caught could not connect")
 				print(e.code())
+				print(server + " is not available.")
 				# Server is down, move to the next
-				self.servers.pop(server)
+				self.servers.pop(0)
 				# Want to keep track of that server just move it to last priority
 				self.servers.append(server)
 		response = sns_pb2.Reply(msg="")
