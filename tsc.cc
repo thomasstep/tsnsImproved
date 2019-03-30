@@ -187,11 +187,12 @@ IReply Client::processCommand(std::string& input)
     ClientContext *context = new(ClientContext);
     stub_->KeepAlive(context, alive, &reply);
 
-    if(!reply.notdead()){ 
+    if(!reply.grpc_status.ok()){ 
     	int ret = connectTo();
 	if (ret < 0){
 		std::cout << "connection failed" << std::endl;
 	}
+	//return ire
     } 
     if (index != std::string::npos) {
         std::string cmd = input.substr(0, index);
