@@ -18,6 +18,7 @@ using csce438::Message;
 using csce438::ListReply;
 using csce438::Request;
 using csce438::Reply;
+using csce438::Alive;
 using csce438::SNSService;
 
 Message MakeMessage(const std::string& username, const std::string& msg) {
@@ -99,17 +100,17 @@ int Client::connectTo()
 	// ------------------------------------------------------------
     std::string login_info = hostname + ":" + port;
     Alive alive;
-    alive.set_notDead(true);
+    alive.set_notdead(true);
     Reply reply;
     stub_ = std::unique_ptr<SNSService::Stub>(SNSService::NewStub(
                grpc::CreateChannel(
                     login_info, grpc::InsecureChannelCredentials())));
     ClientContext *context = new(ClientContext);
-    stub->GetAvailable(context, alive, &reply);
+    stub_->GetAvailable(context, alive, &reply);
     
     // Check if server is available
     if(reply.msg() == "No available server"){
-   	 print("Server not available");
+   	 std::cout << "Server not available" << std::endl;
 	 return -1;
     }
     // Connects to Available Server
