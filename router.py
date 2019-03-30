@@ -30,13 +30,9 @@ class snsServicer(sns_pb2_grpc.SNSServiceServicer):
 			print("Checking if " + server + " is still alive")
 			try:
 				channel = grpc.insecure_channel(server)
-				print("Have a channel")
 				stub = sns_pb2_grpc.SNSServiceStub(channel)
-				print("Have a stub")
 				request = sns_pb2.Alive(notDead=True)
-				print("About to send request")
 				response = stub.KeepAlive(request)
-				print("Got a response")
 				if response.notDead:
 					available = server
 					break
