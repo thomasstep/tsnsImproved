@@ -185,9 +185,9 @@ IReply Client::processCommand(std::string& input)
     alive.set_notdead(true);
     Alive reply;
     ClientContext *context = new(ClientContext);
-    stub_->KeepAlive(context, alive, &reply);
+    grpc::Status status = stub_->KeepAlive(context, alive, &reply);
 
-    if(!reply.grpc_status.ok()){ 
+    if(!status.ok()){ 
     	int ret = connectTo();
 	if (ret < 0){
 		std::cout << "connection failed" << std::endl;
