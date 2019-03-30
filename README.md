@@ -24,4 +24,4 @@ On router run:
 `./startupRouter -i <localIP> -p <routersPort> -f <firstMachinesIP:Port> -s <secondMachinesIP:Port> -t <thirdMachinesIP:Port>`
 
 On server machine run:
-`./startup -i <localIP> -p <machinesPort> -r <routersIP> -t <routersPort>
+`./startup -i <localIP> -p <machinesPort> -r <routersIP> -t <routersPort>`
