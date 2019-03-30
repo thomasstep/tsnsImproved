@@ -98,10 +98,26 @@ int Client::connectTo()
     // Please refer to gRpc tutorial how to create a stub.
 	// ------------------------------------------------------------
     std::string login_info = hostname + ":" + port;
+    Alive alive;
+    alive.set_notDead(true);
+    Reply reply;
     stub_ = std::unique_ptr<SNSService::Stub>(SNSService::NewStub(
                grpc::CreateChannel(
                     login_info, grpc::InsecureChannelCredentials())));
-
+    ClientContext *context = new(ClientContext);
+    stub->GetAvailable(context, alive, &reply);
+    
+    // Check if server is available
+    if(reply.msg() == "No available server"){
+   	 print("Server not available");
+	 return -1;
+    }
+    // Connects to Available Server
+    stub_ = std::unique_ptr<SNSService::Stub>(SNSService::NewStub(
+              grpc::CreateChannel(
+                   reply.msg(), grpc::InsecureChannelCredentials()))); 
+    
+    
     // **********************************
     // MODIFY LOGIN TO SEE IF CONNECTED SERVER IS AVAILABLE SERVER
     // **********************************
@@ -306,18 +322,7 @@ IReply Client::Login() {
     IReply ire;
     ire.grpc_status = status;
     std::cout << "MSG: " << reply.msg() << std::endl;
-    // **********************************
-    // IF MESG RECIEVED IS "PORT NUMBER", THEN RECONNECT
-    // **********************************
-    if (reply.msg() == "Not Available Server") {
-    	//std::string demlimiter = " ";
-	//std::string IP = reply.msg().substr(1, reply.msg().find(delimiter));
-	//std::string PORT = reply.msg().substr(2, reply.msg().find(delimiter));
-	//hostname = IP
-	//port = PORT
-
-    }
-    else if (reply.msg() == "Invalid Username") {
+    if (reply.msg() == "Invalid Username") {
         ire.comm_status = FAILURE_ALREADY_EXISTS;
     } else {
         ire.comm_status = SUCCESS;
