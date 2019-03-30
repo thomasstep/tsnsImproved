@@ -181,6 +181,18 @@ IReply Client::processCommand(std::string& input)
 	// ------------------------------------------------------------
     IReply ire;
     std::size_t index = input.find_first_of(" ");
+    Alive alive;
+    alive.set_notdead(true);
+    Alive reply;
+    ClientContext *context = new(ClientContext);
+    stub_->KeepAlive(context, alive, &reply);
+
+    if(!reply.notdead()){ 
+    	int ret = connectTo();
+	if (ret < 0){
+		std::cout << "connection failed" << std::endl;
+	}
+    } 
     if (index != std::string::npos) {
         std::string cmd = input.substr(0, index);
 
